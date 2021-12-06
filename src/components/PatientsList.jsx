@@ -1,8 +1,8 @@
 import Paciente from './Paciente'
 
-function PatientsList() {
+const PatientsList = () => {
     return (
-        <div className="md:w-1/2 lg:w-3/5 mb-10">
+        <div className="md:w-1/2 lg:w-3/5 pb-10">
             <h2 className="font-bold text-3xl text-center">
                 Listado Pacientes
             </h2>
@@ -18,4 +18,4 @@ function PatientsList() {
     )
 }
 
-export { PatientsList }
+export default PatientsList

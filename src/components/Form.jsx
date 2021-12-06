@@ -1,4 +1,27 @@
-function Form() {
+import { useState } from 'react'
+
+const Form = () => {
+
+    const [ nombre, setNombre ] = useState('')
+    const [ propietario, setPropietario ] = useState('')
+    const [ email, setEmail ] = useState('')
+    const [ fecha, setFecha ] = useState('')
+    const [ sintomas, setSintomas ] = useState('')
+
+    const [ error, setError ] = useState(false)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        //   Validación deL Formulario
+        if ( [ nombre, propietario, email, fecha, sintomas ].includes('') ) {
+            setError(true)
+            return
+        }
+ 
+        setError(false)
+    }
+
     return (
         <div className="md:w-1/2 lg:w-2/5">
             <h2 className="font-bold text-3xl text-center">
@@ -10,20 +33,32 @@ function Form() {
                 <span className="text-indigo-600 font-bold">Administralos</span>
             </p>
 
-            <form className="bg-gray-900 shadow-md rounded-lg p-10 mb-10">
+            <form 
+                onSubmit={handleSubmit}
+                className="bg-gray-900 shadow-md rounded-lg p-10 mb-10"
+            >
+                { error && (
+                    <div className="bg-red-400 p-4 mb-5 rounded-md">
+                        <p className="font-bold text-center uppercase">
+                            Todos los campos son obligatorios
+                        </p>
+                    </div>
+                ) }
+
                 <div className="mb-5">
                     <label 
                         htmlFor="mascota"
                         className="block text-gray-300 uppercase font-bold">
-                        Nombre Mascota
+                        Nombre Mascota 
                     </label>
 
                     <input
                         className="bg-gray-800 w-full p-2 px-4 mt-2 placeholder-gray-500 rounded-md focus:outline-none" 
                         type="text"
                         id="mascota"
-                        autocomplete="off"
                         placeholder="Nombre de la Mascota"
+                        value={nombre}
+                        onChange={ (e) => setNombre(e.target.value) }
                     />
                 </div>
 
@@ -38,8 +73,9 @@ function Form() {
                         className="bg-gray-800 w-full p-2 px-4 mt-2 placeholder-gray-500 rounded-md focus:outline-none" 
                         type="text"
                         id="propietario"
-                        autocomplete="off"
                         placeholder="Nombre del Propietario"
+                        value={propietario}
+                        onChange={ (e) => setPropietario(e.target.value) }
                     />
                 </div>
 
@@ -54,8 +90,9 @@ function Form() {
                         className="bg-gray-800 w-full p-2 px-4 mt-2 placeholder-gray-500 rounded-md focus:outline-none" 
                         type="email"
                         id="email"
-                        autocomplete="off"
                         placeholder="Email Contacto Propietario"
+                        value={email}
+                        onChange={ (e) => setEmail(e.target.value) }
                     />
                 </div>
 
@@ -70,6 +107,8 @@ function Form() {
                         className="bg-gray-800 w-full p-2 px-4 mt-2 placeholder-gray-500 rounded-md focus:outline-none" 
                         type="date"
                         id="alta"
+                        value={fecha}
+                        onChange={ (e) => setFecha(e.target.value) }
                     />
                 </div>
 
@@ -85,11 +124,13 @@ function Form() {
                         id="sintomas"
                         placeholder="Describe los Síntomas"
                         rows="4"
+                        value={sintomas}
+                        onChange={ (e) => setSintomas(e.target.value) }
                     />
                 </div>
                 
                 <input 
-                    className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
+                    className="bg-indigo-600 w-full p-3 text-white rounded-md uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
                     type="submit" 
                     value="Agregar Paciente"
                 />
@@ -99,4 +140,4 @@ function Form() {
     )
 }
 
-export { Form }
+export default Form
