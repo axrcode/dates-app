@@ -76,6 +76,7 @@ const Form = ({ pacientes, setPacientes }) => {
                         type="text"
                         id="mascota"
                         placeholder="Nombre de la Mascota"
+                        autoComplete="off"
                         value={nombre}
                         onChange={ (e) => setNombre(e.target.value) }
                     />
@@ -93,6 +94,7 @@ const Form = ({ pacientes, setPacientes }) => {
                         type="text"
                         id="propietario"
                         placeholder="Nombre del Propietario"
+                        autoComplete="off"
                         value={propietario}
                         onChange={ (e) => setPropietario(e.target.value) }
                     />
@@ -110,6 +112,7 @@ const Form = ({ pacientes, setPacientes }) => {
                         type="email"
                         id="email"
                         placeholder="Email Contacto Propietario"
+                        autoComplete="off"
                         value={email}
                         onChange={ (e) => setEmail(e.target.value) }
                     />
