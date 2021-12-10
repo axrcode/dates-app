@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Error from './Error'
 
 const Form = ({ pacientes, setPacientes }) => {
 
@@ -57,11 +58,9 @@ const Form = ({ pacientes, setPacientes }) => {
                 className="bg-gray-900 shadow-md rounded-lg p-10 mb-10"
             >
                 { error && (
-                    <div className="bg-red-400 p-4 mb-5 rounded-md">
-                        <p className="font-bold text-center uppercase">
-                            Todos los campos son obligatorios
-                        </p>
-                    </div>
+                    <Error 
+                        msg='Todos los campos son obligatorios'
+                    />
                 ) }
 
                 <div className="mb-5">
