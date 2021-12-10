@@ -1,6 +1,6 @@
-import Paciente from './Paciente'
+import Patient from './Patient'
 
-const PatientsList = () => {
+const PatientsList = ({ pacientes }) => {
     return (
         <div className="md:w-1/2 lg:w-3/5 pb-10">
             <h2 className="font-bold text-3xl text-center">
@@ -12,7 +12,14 @@ const PatientsList = () => {
                 <span className="text-indigo-600 font-bold">Pacientes</span>
             </p>
 
-            <Paciente />
+            { 
+                pacientes.map( paciente => (
+                    <Patient
+                        key={paciente.id} 
+                        paciente={paciente}
+                    />
+                ) )   
+            }
 
         </div>
     )

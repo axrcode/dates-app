@@ -11,6 +11,13 @@ const Form = ({ pacientes, setPacientes }) => {
 
     const [ error, setError ] = useState(false)
 
+    const generarId = () => {
+        const random = Math.random().toString(36).substr(2)
+        const date = Date.now().toString(36)
+
+        return date + random
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -28,7 +35,8 @@ const Form = ({ pacientes, setPacientes }) => {
             propietario, 
             email, 
             fecha, 
-            sintomas
+            sintomas,
+            id: generarId()
         }
         
         //   Toma una copia del arreglo y agrega el objeto al final
