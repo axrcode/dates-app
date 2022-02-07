@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import Patient from './Patient'
 
-const PatientsList = ({ pacientes, setPaciente }) => {
+const PatientsList = ({ pacientes, setPaciente, eliminarPaciente }) => {
     return (
         <div className="md:w-1/2 lg:w-3/5 pb-10">
 
@@ -23,6 +23,7 @@ const PatientsList = ({ pacientes, setPaciente }) => {
                                     key={paciente.id} 
                                     paciente={paciente}
                                     setPaciente={setPaciente}
+                                    eliminarPaciente={eliminarPaciente}
                                 />
                             ) )   
                         }
