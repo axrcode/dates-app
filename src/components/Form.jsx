@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Error from './Error'
 
-const Form = ({ pacientes, setPacientes }) => {
+const Form = ({ pacientes, setPacientes, paciente, setPaciente }) => {
 
     const [ nombre, setNombre ] = useState('')
     const [ propietario, setPropietario ] = useState('')
@@ -10,6 +10,17 @@ const Form = ({ pacientes, setPacientes }) => {
     const [ sintomas, setSintomas ] = useState('')
 
     const [ error, setError ] = useState(false)
+
+    useEffect( () => {
+        if ( Object.keys(paciente).length ) {
+            //  Reiniciar los inputs del formulario
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setFecha(paciente.fecha)
+            setSintomas(paciente.sintomas)
+        }
+    }, [paciente])
 
     const generarId = () => {
         const random = Math.random().toString(36).substr(2)
@@ -26,7 +37,7 @@ const Form = ({ pacientes, setPacientes }) => {
             setError(true)
             return
         }
- 
+
         setError(false)
 
         //   Objeto para Paciente
@@ -36,12 +47,21 @@ const Form = ({ pacientes, setPacientes }) => {
             email, 
             fecha, 
             sintomas,
-            id: generarId()
         }
         
-        //   Toma una copia del arreglo y agrega el objeto al final
-        setPacientes([ ...pacientes, objetoPaciente ])
+        if ( paciente.id ) {
+            objetoPaciente.id = paciente.id
+            
+            const pacienteActualizado = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState )
 
+            setPacientes(pacienteActualizado)
+            setPaciente({})
+        } else {
+            //   Toma una copia del arreglo y agrega el objeto al final
+            objetoPaciente.id = generarId()
+            setPacientes([ ...pacientes, objetoPaciente ])
+        }
+        
         //  Reiniciar los inputs del formulario
         setNombre('')
         setPropietario('')
@@ -161,7 +181,7 @@ const Form = ({ pacientes, setPacientes }) => {
                 <input 
                     className="bg-indigo-600 w-full p-3 text-white rounded-md uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
                     type="submit" 
-                    value="Agregar Paciente"
+                    value={ paciente.id ? 'Guardar Cambios' : 'Agregar Paciente' }
                 />
             </form>
 

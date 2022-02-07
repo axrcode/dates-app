@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import Form from './components/Form';
-import Header from './components/Header';
-import PatientsList from './components/PatientsList';
+import Form from './components/Form'
+import Header from './components/Header'
+import PatientsList from './components/PatientsList'
 
 function App() {
 
-    const [ pacientes, setPacientes ] = useState([]);
+    const [ pacientes, setPacientes ] = useState([])
+    const [ paciente, setPaciente ] = useState({})
 
     return (
         <div className="container mx-auto mt-20 md:px-20 px-5">
@@ -15,9 +16,12 @@ function App() {
                 <Form 
                     pacientes={pacientes}
                     setPacientes={setPacientes}
+                    paciente={paciente}
+                    setPaciente={setPaciente}
                 />
                 <PatientsList 
                     pacientes={pacientes}
+                    setPaciente={setPaciente}
                 />
             </div>
         </div>
