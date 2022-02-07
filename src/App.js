@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Form from './components/Form'
 import Header from './components/Header'
 import PatientsList from './components/PatientsList'
@@ -7,6 +7,18 @@ function App() {
 
     const [ pacientes, setPacientes ] = useState([])
     const [ paciente, setPaciente ] = useState({})
+
+    useEffect( () => {
+        const obtenerLocalStorage = () => {
+            const pacienteLocalStorage = JSON.parse(localStorage.getItem('pacientes')) ?? []
+            setPacientes( pacienteLocalStorage )
+        }
+        obtenerLocalStorage()
+    }, []) 
+
+    useEffect( () => {
+        localStorage.setItem( 'pacientes', JSON.stringify( pacientes ) )
+    }, [ pacientes ]) 
 
     const eliminarPaciente = (id) => {
         const pacientesActualizados = pacientes.filter( paciente => paciente.id !== id )
